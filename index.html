@@ -11,6 +11,7 @@
             --text: #333;
             --bg: #f8fafc;
             --card-bg: white;
+            --sidebar-width: 250px;
         }
 
         * {
@@ -24,25 +25,30 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            margin-left: var(--sidebar-width); /* Push content to the right of the sidebar on desktop */
         }
 
+        /* Sidebar Navigation */
         nav {
             position: fixed;
             top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            padding: 1rem;
+            transform: translateX(0); /* Visible by default on desktop */
+            transition: transform 0.3s ease;
         }
 
         nav ul {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 1rem;
             list-style: none;
+            padding: 2rem 1rem;
         }
 
         nav a {
@@ -51,6 +57,7 @@
             padding: 0.5rem 1rem;
             border-radius: 20px;
             transition: all 0.3s ease;
+            display: block;
         }
 
         nav a:hover {
@@ -58,6 +65,19 @@
             color: white;
         }
 
+        /* Hamburger Menu Icon */
+        .hamburger {
+            display: none; /* Hidden on desktop */
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1100;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Main Content */
         section {
             padding: 4rem 2rem;
             max-width: 1200px;
@@ -73,7 +93,7 @@
         }
 
         #home {
-            padding-top: 100px;
+            padding-top: 2rem; /* Reduced padding since nav is no longer at the top */
             text-align: center;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -188,16 +208,16 @@
             color: white;
         }
 
-        /* New styles for the profile photo */
         .profile-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 1rem;
-        }
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-out;
+}
 
         @keyframes fadeIn {
             from {
@@ -210,14 +230,31 @@
             }
         }
 
+        /* Mobile Styles */
         @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+            body {
+                margin-left: 0; /* Remove margin on mobile */
             }
 
             nav {
-                padding: 0.5rem;
+                transform: translateX(-100%); /* Hidden by default on mobile */
+            }
+
+            nav.active {
+                transform: translateX(0); /* Show when active */
+            }
+
+            nav ul {
+                padding: 4rem 1rem; /* Extra padding to account for hamburger icon */
+            }
+
+            .profile-photo {
+        width: 120px;
+        height: 120px;
+            }
+
+            .hamburger {
+                display: block; /* Show hamburger icon on mobile */
             }
 
             section {
@@ -231,15 +268,14 @@
             h2 {
                 font-size: 1.5rem;
             }
-
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-            }
         }
     </style>
 </head>
 <body>
+    <!-- Hamburger Icon for Mobile -->
+    <div class="hamburger">☰</div>
+
+    <!-- Sidebar Navigation -->
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
@@ -313,7 +349,6 @@
     <section id="experience">
         <div class="content">
             <h2>Work Experience</h2>
-
             <div class="card">
                 <h3>Software Developer (Team Project) - SportX</h3>
                 <p>Admin Dashboard</p>
@@ -545,7 +580,16 @@
                 document.querySelector(targetId).scrollIntoView({
                     behavior: 'smooth'
                 });
+                // Close the sidebar on mobile after clicking a link
+                if (window.innerWidth <= 768) {
+                    document.querySelector('nav').classList.remove('active');
+                }
             });
+        });
+
+        // Toggle sidebar on mobile with hamburger icon
+        document.querySelector('.hamburger').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
         });
     </script>
 </body>
