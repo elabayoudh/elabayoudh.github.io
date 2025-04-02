@@ -188,6 +188,17 @@
             color: white;
         }
 
+        /* New styles for the profile photo */
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -220,6 +231,11 @@
             h2 {
                 font-size: 1.5rem;
             }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
         }
     </style>
 </head>
@@ -241,6 +257,7 @@
     </nav>
 
     <section id="home">
+        <img src="profile image.jpg" alt="Ela Bayoudh Profile Photo" class="profile-photo">
         <h1>Ela Bayoudh</h1>
         <div class="content">
             <h2>Profile</h2>
@@ -309,7 +326,7 @@
                 </ul>
             </div>
 
-             <div class="card">
+            <div class="card">
                 <h3>Internship for Final Year Project</h3>
                 <p>Pura Solutions, Sousse, Tunisia</p>
                 <p>Feb 2024 - Jun 2024</p>
@@ -341,14 +358,13 @@
                     <li>Observed the configuration and troubleshooting of network devices.</li>
                 </ul>
             </div>
-            
         </div>
     </section>
 
     <section id="projects">
         <div class="content">
             <h2>Personal Projects</h2>
-             <div class="card">
+            <div class="card">
                 <h3>SportX Sports Management Platform – Desktop and Web Application (01/2025 - Present)</h3>
                 <ul>
                     <li>Front-End: FXML, CSS, UI/UX</li>
@@ -385,7 +401,6 @@
                     <li>UML Design</li>
                 </ul>
             </div>
-            
         </div>
     </section>
 
