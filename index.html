@@ -25,10 +25,9 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            margin-left: var(--sidebar-width); /* Push content to the right of the sidebar on desktop */
+            margin-left: var(--sidebar-width);
         }
 
-        /* Sidebar Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -39,7 +38,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            transform: translateX(0); /* Visible by default on desktop */
+            transform: translateX(0);
             transition: transform 0.3s ease;
         }
 
@@ -55,19 +54,13 @@
             color: var(--primary);
             text-decoration: none;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        nav a:hover {
+            border-radius: 20  nav a:hover {
             background: var(--secondary);
             color: white;
         }
 
-        /* Hamburger Menu Icon */
         .hamburger {
-            display: none; /* Hidden on desktop */
+            display: none;
             position: fixed;
             top: 1rem;
             left: 1rem;
@@ -77,7 +70,6 @@
             color: var(--primary);
         }
 
-        /* Main Content */
         section {
             padding: 4rem 2rem;
             max-width: 1200px;
@@ -93,7 +85,7 @@
         }
 
         #home {
-            padding-top: 2rem; /* Reduced padding since nav is no longer at the top */
+            padding-top: 2rem;
             text-align: center;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -209,15 +201,29 @@
         }
 
         .profile-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
-    animation: fadeIn 1s ease-out;
-}
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .certificate-img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-img:hover {
+            transform: scale(1.05);
+        }
 
         @keyframes fadeIn {
             from {
@@ -230,31 +236,30 @@
             }
         }
 
-        /* Mobile Styles */
         @media (max-width: 768px) {
             body {
-                margin-left: 0; /* Remove margin on mobile */
+                margin-left: 0;
             }
 
             nav {
-                transform: translateX(-100%); /* Hidden by default on mobile */
+                transform: translateX(-100%);
             }
 
             nav.active {
-                transform: translateX(0); /* Show when active */
+                transform: translateX(0);
             }
 
             nav ul {
-                padding: 4rem 1rem; /* Extra padding to account for hamburger icon */
+                padding: 4rem 1rem;
             }
 
             .profile-photo {
-        width: 120px;
-        height: 120px;
+                width: 120px;
+                height: 120px;
             }
 
             .hamburger {
-                display: block; /* Show hamburger icon on mobile */
+                display: block;
             }
 
             section {
@@ -272,10 +277,8 @@
     </style>
 </head>
 <body>
-    <!-- Hamburger Icon for Mobile -->
     <div class="hamburger">☰</div>
 
-    <!-- Sidebar Navigation -->
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
@@ -490,7 +493,7 @@
             </div>
             <div class="card">
                 <h3>Team Member</h3>
-                <p> Club Sci Data (ESPRIM), Monastir</p>
+                <p>Club Sci Data (ESPRIM), Monastir</p>
                 <p>Nov 2024 - Present</p>
                 <p>Actively participate in club activities and initiatives - Engaged in multiple training sessions on Machine Learning and Cloud Computing to enhance technical skills.</p>
             </div>
@@ -521,14 +524,16 @@
             </div>
 
             <div class="card">
-                <h3>AI-900: Microsoft Azure AI Fundamentals - DataScientist.fr </h3>
+                <h3>AI-900: Microsoft Azure AI Fundamentals - DataScientist.fr</h3>
                 <p>April 2025</p>
                 <ul>
                     <li>Practice Exam & Preparation Video.</li>
                     <li>Covered key AI concepts and Microsoft Azure AI services through a structured practice exam and detailed explanations.</li>
                 </ul>
+                <a href="AI-900_Certificate.jpg" target="_blank">
+                    <img src="resultat.jpg" alt="AI-900 Certificate" class="certificate-img">
+                </a>
             </div>
-            
         </div>
     </section>
 
@@ -560,7 +565,6 @@
     </footer>
 
     <script>
-        // Intersection Observer for scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -569,12 +573,10 @@
             });
         }, { threshold: 0.1 });
 
-        // Observe all sections
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
 
-        // Smooth scroll for navigation links
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -582,14 +584,12 @@
                 document.querySelector(targetId).scrollIntoView({
                     behavior: 'smooth'
                 });
-                // Close the sidebar on mobile after clicking a link
                 if (window.innerWidth <= 768) {
                     document.querySelector('nav').classList.remove('active');
                 }
             });
         });
 
-        // Toggle sidebar on mobile with hamburger icon
         document.querySelector('.hamburger').addEventListener('click', () => {
             document.querySelector('nav').classList.toggle('active');
         });
