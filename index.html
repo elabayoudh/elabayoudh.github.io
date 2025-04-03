@@ -219,6 +219,27 @@
     animation: fadeIn 1s ease-out;
 }
 
+        .download-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--secondary);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--secondary);
+    text-align: center;
+}
+
+.download-btn:hover {
+    background-color: transparent;
+    color: var(--secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -274,7 +295,6 @@
 <body>
     <!-- Hamburger Icon for Mobile -->
     <div class="hamburger">☰</div>
-
     <!-- Sidebar Navigation -->
     <nav>
         <ul>
@@ -299,6 +319,8 @@
             <h2>Profile</h2>
             <div class="card">
                 <p>I'm a first-year engineering student specializing in computer engineering, eager to deepen my focus in cloud computing and data engineering in an innovative environment that fosters technical growth and hands-on experience.</p>
+                <!-- Ajout du bouton de téléchargement -->
+            <a href="Ela Bayoudh-Resume.pdf" download="Ela_Bayoudh_CV.pdf" class="download-btn">Download My CV (PDF)</a>
             </div>
         </div>
     </section>
