@@ -25,59 +25,57 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            margin-left: var(--sidebar-width); /* Push content to the right of the sidebar on desktop */
+            padding-left: var(--sidebar-width);
         }
 
-        /* Sidebar Navigation */
         nav {
             position: fixed;
-            top: 0;
             left: 0;
+            top: 0;
             width: var(--sidebar-width);
-            height: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            background: var(--primary);
+            padding: 2rem 1rem;
+            overflow-y: auto;
             z-index: 1000;
-            transform: translateX(0); /* Visible by default on desktop */
-            transition: transform 0.3s ease;
         }
 
         nav ul {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.5rem;
             list-style: none;
-            padding: 2rem 1rem;
         }
 
         nav a {
-            color: var(--primary);
+            color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
             display: block;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
             background: var(--secondary);
-            color: white;
+            transform: translateX(5px);
         }
 
-        /* Hamburger Menu Icon */
-        .hamburger {
-            display: none; /* Hidden on desktop */
+        .menu-toggle {
+            display: none;
             position: fixed;
             top: 1rem;
-            left: 1rem;
-            z-index: 1100;
-            font-size: 2rem;
+            right: 1rem;
+            z-index: 1001;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
             cursor: pointer;
-            color: var(--primary);
         }
 
-        /* Main Content */
         section {
             padding: 4rem 2rem;
             max-width: 1200px;
@@ -93,7 +91,7 @@
         }
 
         #home {
-            padding-top: 2rem; /* Reduced padding since nav is no longer at the top */
+            padding-top: 2rem;
             text-align: center;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
@@ -133,7 +131,6 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
             transition: transform 0.3s ease;
-            color: var(--text);
         }
 
         .card:hover {
@@ -208,16 +205,42 @@
             color: white;
         }
 
-        .profile-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1rem;
-    animation: fadeIn 1s ease-out;
-}
+        .download-cv {
+            background: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .download-cv:hover {
+            background: white;
+            color: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .sidebar-download {
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .sidebar-download .download-cv {
+            width: calc(100% - 2rem);
+            margin: 0;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .sidebar-download .download-cv:hover {
+            background: var(--primary);
+            color: white;
+        }
 
         @keyframes fadeIn {
             from {
@@ -230,31 +253,22 @@
             }
         }
 
-        /* Mobile Styles */
         @media (max-width: 768px) {
             body {
-                margin-left: 0; /* Remove margin on mobile */
+                padding-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
             }
 
             nav {
-                transform: translateX(-100%); /* Hidden by default on mobile */
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
 
             nav.active {
-                transform: translateX(0); /* Show when active */
-            }
-
-            nav ul {
-                padding: 4rem 1rem; /* Extra padding to account for hamburger icon */
-            }
-
-            .profile-photo {
-        width: 120px;
-        height: 120px;
-            }
-
-            .hamburger {
-                display: block; /* Show hamburger icon on mobile */
+                transform: translateX(0);
             }
 
             section {
@@ -272,10 +286,8 @@
     </style>
 </head>
 <body>
-    <!-- Hamburger Icon for Mobile -->
     <div class="hamburger">☰</div>
 
-    <!-- Sidebar Navigation -->
     <nav>
         <ul>
             <li><a href="#home">Home</a></li>
@@ -290,6 +302,9 @@
             <li><a href="#hobbies">Hobbies</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="sidebar-download">
+            <a href="/Ela Bayoudh-Resume.pdf" download class="download-cv">Download CV</a>
+        </div>
     </nav>
 
     <section id="home">
@@ -299,6 +314,7 @@
             <h2>Profile</h2>
             <div class="card">
                 <p>I'm a first-year engineering student specializing in computer engineering, eager to deepen my focus in cloud computing and data engineering in an innovative environment that fosters technical growth and hands-on experience.</p>
+                <a href="/Ela Bayoudh-Resume.pdf" download class="download-cv">Download My CV</a>
             </div>
         </div>
     </section>
@@ -326,21 +342,15 @@
 
     <section id="skills">
         <div class="content">
-            <h2>Skills</h2>
+            <h2>Technical Skills</h2>
             <div class="card">
                 <div class="skills-grid">
-                    <div class="skill">HTML, CSS</div>
+                    <div class="skill">HTML, CSS, JavaScript</div>
                     <div class="skill">Java, JavaFX</div>
-                    <div class="skill">PHP</div>
-                    <div class="skill">Symfony</div>
-                    <div class="skill">JavaScript</div>
-                    <div class="skill">Nest.js</div>
-                    <div class="skill">Next.js</div>
-                    <div class="skill">Node.js</div>
+                    <div class="skill">PHP, Symfony</div>
+                    <div class="skill">Nest.js, Next.js, Node.js</div>
                     <div class="skill">Python</div>
                     <div class="skill">MySQL</div>
-                    <div class="skill">Git</div>
-                    <div class="skill">Docker</div>
                     <div class="skill">Team Collaboration</div>
                     <div class="skill">Problem-Solving</div>
                     <div class="skill">Leadership</div>
@@ -353,16 +363,15 @@
         <div class="content">
             <h2>Work Experience</h2>
             <div class="card">
-                <h3>Internship for Final Year Project</h3>
-                <p>Pura Solutions, Sousse, Tunisia</p>
-                <p>Feb 2024 - Jun 2024</p>
+                <h3>Summer Internship</h3>
+                <p>Groupe SOTUFA / Sfax, Kssibet el Mediouni, Tunisia</p>
+                <p>Jun 2023 - Jul 2023</p>
                 <ul>
-                    <li>Designed and developed a cloud platform for sharing confidential accounting documents.</li>
-                    <li>Implemented secure file sharing and user authentication.</li>
-                    <li>Developed using Next.js, Nest.js, and Flutter frameworks.</li>
+                    <li>Brought together several new knowledge in the field of computer networking.</li>
+                    <li>Learned about network protocols, architectures, and security measures.</li>
+                    <li>Observed the configuration and troubleshooting of network devices.</li>
                 </ul>
             </div>
-
             <div class="card">
                 <h3>Summer Internship</h3>
                 <p>Proxym-IT, Sousse, Tunisia</p>
@@ -375,56 +384,25 @@
             </div>
             
             <div class="card">
-                <h3>Summer Internship</h3>
-                <p>Sancella, Ksibet el Mediouni / Monastir</p>
-                <p>Jun 2023 - Jul 2023</p>
+                <h3>Internship for Final Year Project</h3>
+                <p>Pura Solutions, Sousse, Tunisia</p>
+                <p>Feb 2024 - Jun 2024</p>
                 <ul>
-                    <li>Brought together several new knowledge in the field of computer networking.</li>
-                    <li>Learned about network protocols, architectures, and security measures.</li>
-                    <li>Observed the configuration and troubleshooting of network devices.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <div class="content">
-            <h2>Personal Projects</h2>
-            <div class="card">
-                <h3>SportX Sports Management Platform – Desktop and Web Application (01/2025 - Present)</h3>
-                <ul>
-                    <li>Front-End: FXML, CSS, UI/UX</li>
-                    <li>Databases: MySQL</li>
-                    <li>Programming: JavaFX, Symfony, PHP</li>
-                    <li>Other: Team Collaboration, Full-Stack Development</li>
+                    <li>Designed and developed a cloud platform for sharing confidential accounting documents.</li>
+                    <li>Implemented secure file sharing and user authentication.</li>
+                    <li>Developed using Next.js, Nest.js, and Flutter frameworks.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <h3>Design and Development of a Cloud Platform for the Sharing of Confidential Accounting Documents (PFE) (2024)</h3>
+                <h3>Software Developer (Team Project) - SportX</h3>
+                <p>Admin Dashboard</p>
+                <p>Jan 2025 - Present</p>
                 <ul>
-                    <li>Front-End: NextJs, Tailwind CSS</li>
-                    <li>Back-End: NestJs</li>
-                    <li>Database: NoSQL (MongoDB)</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>Design and Development of an Online Cinema Booking Platform (Internship ProxymIT) (2023)</h3>
-                <ul>
-                    <li>Front-End: HTML, CSS</li>
-                    <li>Back-End: NodeJS/ExpressJS</li>
-                    <li>Database: MySQL + ORM: Prisma</li>
-                </ul>
-            </div>
-            
-            <div class="card">
-                <h3>Design and Development of an E-Learning Platform (2022)</h3>
-                <ul>
-                    <li>Front-End: HTML/CSS</li>
-                    <li>Back-End: PHP</li>
-                    <li>Database: MySQL</li>
-                    <li>UML Design</li>
+                    <li>Collaborated with a team to develop SportX, a sports management platform featuring both a desktop and web application to manage users, events, and marketplace products.</li>
+                    <li>Designed and implemented an admin dashboard with features like real-time data filtering, loading overlays, and sidebar animations.</li>
+                    <li>Coordinated with team members to ensure seamless integration between the desktop app and the upcoming web version.</li>
+                    <li>Developed problem-solving and teamwork skills while meeting project deadlines.</li>
                 </ul>
             </div>
         </div>
@@ -448,7 +426,7 @@
                     </div>
                     <div class="language">
                         <p>French</p>
-                        <p>C1</p>
+                        <p>Professional</p>
                         <div class="language-level">
                             <span class="dot filled"></span>
                             <span class="dot filled"></span>
@@ -459,7 +437,7 @@
                     </div>
                     <div class="language">
                         <p>English</p>
-                        <p>B2</p>
+                        <p>Professional</p>
                         <div class="language-level">
                             <span class="dot filled"></span>
                             <span class="dot filled"></span>
@@ -480,19 +458,19 @@
                 <h3>Scout Leader</h3>
                 <p>Teboulba Scout Group, Monastir</p>
                 <p>Jan 2017 - Present</p>
-                <p>Leader in Teboulba Scout group Since 2017 - I have passed several Leadership training courses</p>
+                <p>Leader in Teboulba Scout Group since 2017, passed several leadership training courses.</p>
             </div>
             <div class="card">
                 <h3>Office Member</h3>
                 <p>Club CPU ISIMM, Monastir</p>
-                <p>Nov 2021 - Jun 2024</p>
-                <p>President - Robotics trainer - Planning and managing the club activities - Responsible for the integration of new members</p>
+                <p>Jan 2023 - Jun 2024</p>
+                <p>President of the Robotics trainer, planning and managing club activities, responsible for the integration of new members.</p>
             </div>
             <div class="card">
                 <h3>Team Member</h3>
-                <p> Club Sci Data (ESPRIM), Monastir</p>
+                <p>DataScience Club (ESPRIM), Monastir</p>
                 <p>Nov 2024 - Present</p>
-                <p>Actively participate in club activities and initiatives - Engaged in multiple training sessions on Machine Learning and Cloud Computing to enhance technical skills.</p>
+                <p>Actively participate in club activities and initiatives, engaged in multiple training sessions on Machine Learning and Cloud Computing.</p>
             </div>
         </div>
     </section>
@@ -501,8 +479,8 @@
         <div class="content">
             <h2>Achievements</h2>
             <div class="card">
-                <h3>First Place - GreeNovation Hackathon, ESPRIM</h3>
-                <p>Collaborated with a team to develop EasyLex, an AI-powered educational support tool for children with dyslexia, and we presented the project to a panel of judges, securing 1st place among competing teams.</p>
+                <h3>First Place - Greenovation Hackathon, ESPRIM</h3>
+                <p>Collaborated with a team to develop EasyLex, an AI-powered educational support tool for children with dyslexia, securing 1st place among competing teams.</p>
             </div>
         </div>
     </section>
@@ -519,16 +497,6 @@
                     <li>Covered topics like model training, hyperparameter tuning, and evaluation.</li>
                 </ul>
             </div>
-
-            <div class="card">
-                <h3>AI-900: Microsoft Azure AI Fundamentals - DataScientist.fr </h3>
-                <p>April 2025</p>
-                <ul>
-                    <li>Practice Exam & Preparation Video.</li>
-                    <li>Covered key AI concepts and Microsoft Azure AI services through a structured practice exam and detailed explanations.</li>
-                </ul>
-            </div>
-            
         </div>
     </section>
 
@@ -538,7 +506,6 @@
             <div class="card">
                 <div class="hobbies-grid">
                     <div class="hobby">Sport</div>
-                    <div class="hobby">Camping</div>
                     <div class="hobby">Robotics</div>
                     <div class="hobby">Learning Languages</div>
                     <div class="hobby">Community Involvement</div>
@@ -551,7 +518,7 @@
         <h2>Contact Me</h2>
         <p>Email: <a href="mailto:elapro01bayoudh@gmail.com">elapro01bayoudh@gmail.com</a></p>
         <p>Phone: 29 203 089</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/ela-bayoudh-34976823b/">linkedin.com/in/ElaBayoudh</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/ela-bayoudh">linkedin.com/in/ela-bayoudh</a></p>
         <p>GitHub: <a href="https://github.com/elabayoudh">github.com/elabayoudh</a></p>
     </section>
 
@@ -560,7 +527,6 @@
     </footer>
 
     <script>
-        // Intersection Observer for scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -569,27 +535,25 @@
             });
         }, { threshold: 0.1 });
 
-        // Observe all sections
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
 
-        // Smooth scroll for navigation links
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // Close the sidebar on mobile after clicking a link
-                if (window.innerWidth <= 768) {
-                    document.querySelector('nav').classList.remove('active');
+                if (!link.hasAttribute('download')) {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    if (window.innerWidth <= 768) {
+                        document.querySelector('nav').classList.remove('active');
+                    }
                 }
             });
         });
 
-        // Toggle sidebar on mobile with hamburger icon
         document.querySelector('.hamburger').addEventListener('click', () => {
             document.querySelector('nav').classList.toggle('active');
         });
